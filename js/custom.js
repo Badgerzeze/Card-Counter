@@ -33,8 +33,32 @@ function deckCount7() {
 function deckCount8() {
   var deckCount = 8;
 }
-$(function() {
 
+// Function to calculate true count with 2 decimal places
+function calc_true_count(deck, count) {
+    var cal_value = parseInt(count, 10) / parseInt(deck, 10);
+    // Return with 2 decimal places instead of 1
+    return cal_value.toFixed(2);
+}
+
+function calc_bet_amt(true_count) {
+  var bet_amt = "Bet 1x";
+  if (true_count < 2) {
+    bet_amt = "Bet 1x";
+  }
+  if (true_count >= 2 && true_count < 4) {
+    bet_amt = "Bet 2x";
+  } else if (true_count >= 4 && true_count < 6) {
+    bet_amt = "Bet 3x";
+  } else if (true_count >= 6 && true_count < 8) {
+    bet_amt = "Bet 4x";
+  } else if (true_count >= 8) {
+    bet_amt = "Bet 5x";
+  }
+  $("#bet").html(bet_amt);
+}
+
+$(function() {
   var deckCount = 8;
   var count = 0;
 
@@ -76,32 +100,9 @@ $(function() {
 // Reset All Values to their Defaults
 function resetValues() {
   $("#runningCount").text("0");
-  $("#trueCount").text("0.00"); // Changed to 2 decimal places
+  $("#trueCount").text("0.00");
   $("#bet").text("Bet 1x");
   $("input[name=option]").filter("[value='8']").prop("checked", true);
-}
-
-function calc_true_count(deck, count) {
-    var cal_value = parseInt(count, 10) / parseInt(deck, 10);
-    // Return with 2 decimal places instead of 1
-    return cal_value.toFixed(2);
-}
-
-function calc_bet_amt(true_count) {
-  var bet_amt = "Bet 1x";
-  if (true_count < 2) {
-    bet_amt = "Bet 1x";
-  }
-  if (true_count >= 2 && true_count < 4) {
-    bet_amt = "Bet 2x";
-  } else if (true_count >= 4 && true_count < 6) {
-    bet_amt = "Bet 3x";
-  } else if (true_count >= 6 && true_count < 8) {
-    bet_amt = "Bet 4x";
-  } else if (true_count >= 8) {
-    bet_amt = "Bet 5x";
-  }
-  $("#bet").html(bet_amt);
 }
 
 // Add keyboard event listener for numpad
