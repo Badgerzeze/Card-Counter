@@ -1,6 +1,5 @@
 // Set default variable values
 
-
 // Get Deck Count from Segmented Controller
 
 function deckCount1() {
@@ -40,39 +39,30 @@ $(function() {
   var count = 0;
 
   // User Clicks 10-A The Running Count Goes Down by 1
-
   $(".decreaseCount").click(function() {
     count = parseInt($("#runningCount").text());
     $("#runningCount").text(count - 1);
     count = parseInt($("#runningCount").text());
     $("#trueCount").html(calc_true_count(deckCount, count));
     calc_bet_amt(parseFloat($("#trueCount").html()));
-
-
-
   });
 
   // User Clicks 2-6 The Running Count Goes Up by 1
-
   $(".increaseCount").click(function() {
     count = parseInt($("#runningCount").text());
     $("#runningCount").text(count + 1);
     count = parseInt($("#runningCount").text());
     $("#trueCount").html(calc_true_count(deckCount, count));
     calc_bet_amt(parseFloat($("#trueCount").html()));
-
   });
 
   // User Clicks 7-9 The Running Count Doesn"t Change
-
   $(".noCount").click(function() {
     count = parseInt($("#runningCount").text());
     $("#runningCount").text(count);
     count = parseInt($("#runningCount").text());
     $("#trueCount").html(calc_true_count(deckCount, count));
     calc_bet_amt(parseFloat($("#trueCount").html()));
-
-
   });
 
   $(".segmented-control__input").click(function() {
@@ -80,15 +70,13 @@ $(function() {
     count = parseInt($("#runningCount").text());
     $("#trueCount").html(calc_true_count(deckCount, count));
     calc_bet_amt(parseFloat($("#trueCount").html()));
-
-
   });
 });
-// Reset All Values to their Defaults
 
+// Reset All Values to their Defaults
 function resetValues() {
   $("#runningCount").text("0");
-  $("#trueCount").text("0.0");
+  $("#trueCount").text("0.00"); // Changed to 2 decimal places
   $("#bet").text("Bet 1x");
   $("input[name=option]").filter("[value='8']").prop("checked", true);
 }
@@ -114,7 +102,6 @@ function calc_bet_amt(true_count) {
     bet_amt = "Bet 5x";
   }
   $("#bet").html(bet_amt);
-
 }
 
 // Add keyboard event listener for numpad
@@ -141,4 +128,3 @@ $(document).keydown(function(e) {
         // Number 1 is not used in card counting system
     }
 });
-
