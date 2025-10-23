@@ -94,10 +94,9 @@ function resetValues() {
 }
 
 function calc_true_count(deck, count) {
-  var cal_value = parseInt(count, 10) / parseInt(deck, 10);
-  //return Math.round(cal_value,1);
-
-  return cal_value.toFixed(1);
+    var cal_value = parseInt(count, 10) / parseInt(deck, 10);
+    // Return with 2 decimal places instead of 1
+    return cal_value.toFixed(2);
 }
 
 function calc_bet_amt(true_count) {
@@ -142,3 +141,4 @@ $(document).keydown(function(e) {
         // Number 1 is not used in card counting system
     }
 });
+
