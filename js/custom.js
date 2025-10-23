@@ -115,4 +115,30 @@ function calc_bet_amt(true_count) {
     bet_amt = "Bet 5x";
   }
   $("#bet").html(bet_amt);
+
 }
+
+// Add keyboard event listener for numpad
+$(document).keydown(function(e) {
+    // Check if key is from numpad (including with NumLock off)
+    var key = e.which;
+    
+    // Numpad keys: 0-9 (96-105), also support regular number keys (48-57)
+    if ((key >= 96 && key <= 105) || (key >= 48 && key <= 57)) {
+        e.preventDefault();
+        
+        var actualNumber = key >= 96 ? key - 96 : key - 48;
+        
+        if (actualNumber === 0) {
+            // Numpad 0 = 10-A (decrease count)
+            $(".decreaseCount").first().click();
+        } else if (actualNumber >= 2 && actualNumber <= 6) {
+            // Numpad 2-6 = increase count
+            $(".increaseCount").first().click();
+        } else if (actualNumber >= 7 && actualNumber <= 9) {
+            // Numpad 7-9 = no count change
+            $(".noCount").first().click();
+        }
+        // Number 1 is not used in card counting system
+    }
+});
