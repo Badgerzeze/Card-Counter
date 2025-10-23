@@ -34,10 +34,10 @@ function deckCount8() {
   var deckCount = 8;
 }
 
-// Function to calculate true count with 2 decimal places
-function calc_true_count(deck, count) {
+// NEW: Override the calc_true_count function to always use 2 decimals
+window.calc_true_count = function(deck, count) {
     var cal_value = parseInt(count, 10) / parseInt(deck, 10);
-    // Return with 2 decimal places instead of 1
+    console.log("Calculating true count:", count + " / " + deck + " = " + cal_value.toFixed(2));
     return cal_value.toFixed(2);
 }
 
@@ -67,8 +67,9 @@ $(function() {
     count = parseInt($("#runningCount").text());
     $("#runningCount").text(count - 1);
     count = parseInt($("#runningCount").text());
-    $("#trueCount").html(calc_true_count(deckCount, count));
-    calc_bet_amt(parseFloat($("#trueCount").html()));
+    var trueCount = calc_true_count(deckCount, count);
+    $("#trueCount").html(trueCount);
+    calc_bet_amt(parseFloat(trueCount));
   });
 
   // User Clicks 2-6 The Running Count Goes Up by 1
@@ -76,8 +77,9 @@ $(function() {
     count = parseInt($("#runningCount").text());
     $("#runningCount").text(count + 1);
     count = parseInt($("#runningCount").text());
-    $("#trueCount").html(calc_true_count(deckCount, count));
-    calc_bet_amt(parseFloat($("#trueCount").html()));
+    var trueCount = calc_true_count(deckCount, count);
+    $("#trueCount").html(trueCount);
+    calc_bet_amt(parseFloat(trueCount));
   });
 
   // User Clicks 7-9 The Running Count Doesn"t Change
@@ -85,15 +87,17 @@ $(function() {
     count = parseInt($("#runningCount").text());
     $("#runningCount").text(count);
     count = parseInt($("#runningCount").text());
-    $("#trueCount").html(calc_true_count(deckCount, count));
-    calc_bet_amt(parseFloat($("#trueCount").html()));
+    var trueCount = calc_true_count(deckCount, count);
+    $("#trueCount").html(trueCount);
+    calc_bet_amt(parseFloat(trueCount));
   });
 
   $(".segmented-control__input").click(function() {
     deckCount = $('input[name=option]:checked').val();
     count = parseInt($("#runningCount").text());
-    $("#trueCount").html(calc_true_count(deckCount, count));
-    calc_bet_amt(parseFloat($("#trueCount").html()));
+    var trueCount = calc_true_count(deckCount, count);
+    $("#trueCount").html(trueCount);
+    calc_bet_amt(parseFloat(trueCount));
   });
 });
 
